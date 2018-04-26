@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>基础表格</title>
+	<style>
+	* {
+		padding: 0;
+		margin: 0;
+	}
+		.container {
+			width: 1920px;
+			height: 1080px;
+			display: flex;
+			box-sizing: border-box;
+		}
+		.left-slide {
+			width: 15%;
+			height: 100%;
+			background: gray;
+		}
+		.right-slide {
+			width: 85%;
+			height: 100%;
+			background: pink;
+
+		}
+		.header {
+			width: 100%;
+			height: 8%;
+			background: pink;
+		}
+		.right-title {
+			width: 100%;
+			height: 12%;
+			background: orange;
+		}
+		.content {
+			width: 100%;
+			height: 50%;
+			background: skyblue;
+			display: flex;
+			flex-wrap: wrap;
+			padding-bottom: 30px;
+			box-sizing: border-box;
+		}
+		.content .content-part {
+			/*float: left;*/
+			width: 741px;
+			height: 225px;
+			margin: 30px 30px 0 30px;
+		
+		}
+		.content .content-part:nth-child(2n+1) {
+			background: yellow;
+		}
+		.content .content-part:nth-child(2n) {
+			background: blue;
+		}
+		 .title {
+			box-sizing: border-box;
+			width: 100%;
+			border-bottom: 1px solid #ccc;
+			/*background: #00d5f5;*/
+			color: #eee;
+			padding: 10px 30px;
+
+
+
+		}
+		.table {
+			width: 94.5%;
+		    height: 30%;
+		    background: orange;
+		    margin: 0 30px;
+		    box-sizing: border-box;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="left-slide">
+			
+		</div>
+		<div class="right-slide">
+			<div class="header"></div>
+			<div class="right-title"></div>
+			<div class="content">
+				<div class="content-part content-part1">
+					<h3 class="title">内容</h3>
+				</div>
+				<div class="content-part content-part2">
+					<h3 class="title">内容</h3>
+				</div>
+				<div class="content-part content-part3">
+					<h3 class="title">内容</h3>
+				</div>
+				<div class="content-part content-part4">
+					<h3 class="title">内容</h3>
+				</div>
+			</div>
+			<div class="table">
+				<h3 class="title">内容</h3>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

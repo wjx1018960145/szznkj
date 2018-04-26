@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="RollList">
+	
+	<resultMap id="BaseResultMap" class="com.szzn.mode.RollList">
+		<result column="uid"  property="key"  jdbcType="VARCHAR" />
+		<result column="rollid" property="id"   jdbcType="VARCHAR" />
+		<result column="rolltitle" property="title" jdbcType="VARCHAR" />
+		<result column="rolldes" property="des" jdbcType="VARCHAR" />
+		<result column="rolllink" property="link" jdbcType="VARCHAR" />
+		<result column="rolltype" property="type" jdbcType="VARCHAR" />
+	</resultMap>
+	
+		<!--添加产品 -->
+	<insert id="commitRoll" parameterClass="com.appms.bean.RollList">
+		insert into roll (uid,rollid,rolltitle,rolldes,rolllink,rolltype)
+		values (
+		#key#,#id#,#title#,#des#,#link#,#type#
+		)
+	</insert>
+	<!-- 查询所有产品 -->
+	<select id="selectAllRoll" parameterClass="int"  resultMap="BaseResultMap">
+		SELECT * FROM roll;
+	</select>
+	
+</sqlMap>

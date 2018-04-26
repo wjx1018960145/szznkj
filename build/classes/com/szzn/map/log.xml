@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Log">
+	<resultMap id="BaseResultMap" class="com.szzn.mode.Log">
+		<result column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="userid" property="userid" jdbcType="VARCHAR"/>
+		<result column="action" property="action" jdbcType="VARCHAR"/>
+		<result column="atime" property="atime" jdbcType="VARCHAR"/>
+	</resultMap>
+	<select id = "sellog" parameterClass="com.szzn.mode.Log" resultMap="BaseResultMap">
+		select * from log 
+	</select>
+	
+	<!-- 根据id查询用户详情 -->
+	<select id="selectLog" parameterClass="String" resultMap="BaseResultMap">
+		select * from user where userid=#userId#;
+	</select>
+	<!--插入日志-->
+	<insert id="commitLog" parameterClass="com.szzn.mode.Log">
+		insert into log (id,userid,action,atime)
+		values (#id#,
+		#userid#,#action#,#atime#
+		)
+		<selectKey resultClass="com.szzn.mode.Log">
+                select * from log where id = #id# 
+            </selectKey>
+	</insert>
+</sqlMap>

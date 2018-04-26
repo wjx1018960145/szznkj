@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="User">
+	<resultMap id="BaseResultMap" class="com.szzn.mode.User">
+		<result column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="userid" property="userid" jdbcType="VARCHAR"/>
+		<result column="password" property="password" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="VARCHAR"/>
+		<result column="phone" property="phone" jdbcType="VARCHAR"/>
+		<result column="nick" property="nick" jdbcType="VARCHAR"/>
+		<result column="headImg" property="headImg" jdbcType="VARCHAR"/>
+		<result column="position" property="position" jdbcType="VARCHAR"/>
+		<result column="sex" property="sex" jdbcType="VARCHAR"/>
+		<result column= "roles" property="roles" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!--添加用户-->
+	<insert id="commitU"  parameterClass="com.szzn.mode.User" >
+		
+         <![CDATA[  
+		insert into user (id,userid,password,type ,phone,nick,headImg,position,sex,roles)
+		values (#id#,#userid#,
+		#password#,#type#,#phone#,#nick#,#headImg#,#position#,#sex#,#roles#
+		)
+		  ]]> 
+		  <selectKey resultClass="com.szzn.mode.User">
+                select * from user where id = #id# 
+            </selectKey>
+	</insert>
+	<select id = "login" parameterClass="com.szzn.mode.User" resultMap="BaseResultMap">
+		select * from user where userid=#userid# and password=#password#
+	</select>
+	<!-- 根据id查询用户详情 -->
+	<select id="selectByUserId" parameterClass="String" resultMap="BaseResultMap">
+		select * from user where userid=#userId#;
+	</select>
+	
+	<select id="selectAllU" parameterClass="String" resultMap="BaseResultMap">
+		select * from user;
+	</select>
+	<!--查询当前权限下的用户-->
+	<select id="selectAllUWithPerid" parameterClass="String" resultMap="BaseResultMap">
+		
+	</select>
+	
+	
+	 <!-- 修改用户 -->
+	  <update id="updateUser" parameterClass="com.szzn.mode.User">
+		update user set 
+		 nick=#nick#
+		,position=#position#
+		,phone=#phone#
+		where id=#id#
+	</update>
+	
+	<!--删除用户-->
+	<delete id="deleteUser" parameterClass="com.szzn.mode.User">
+		delete from user where id=#id#
+	</delete>
+	
+</sqlMap>

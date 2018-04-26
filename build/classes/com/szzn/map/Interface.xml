@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Interface">
+	<resultMap id="BaseResultMap" class="com.szzn.mode.Interface">
+		<result column="uid" property="uid" jdbcType="VARCHAR"/>
+		<result column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="author" property="author" jdbcType="VARCHAR"/>
+		<result column="ctime" property="ctime" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="prject" property="prject" jdbcType="VARCHAR"/>
+		<result column="interfaces" property="interfaces" jdbcType="VARCHAR"/>
+		<result column="des" property="des" jdbcType="VARCHAR"/>
+		<result column="rank" property="rank" jdbcType="VARCHAR"/>
+		<result column="path" property="path" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!--查询所有接口-->
+	<select id = "selInterface" parameterClass="com.szzn.mode.Log" resultMap="BaseResultMap">
+		select * from interface 
+	</select>
+	
+	<!-- 根据接口名称查询 -->
+	<select id="selectInterface" parameterClass="String" resultMap="BaseResultMap">
+		select * from interface where name=#name#;
+	</select>
+	<!--添加接口-->
+	<insert id="commitInterface" parameterClass="com.szzn.mode.Interface">
+		insert into interface (uid,id,author,ctime,name,prject,interfaces,rank,des,path)
+		values (#uid#,#id#,
+		#author#,#ctime#,#name#,#prject#,#interfaces#,#rank#,#des#,#path#
+		)
+		<selectKey resultClass="java.lang.String">
+                select id from interface where id = #id# 
+            </selectKey>
+	</insert>
+	 <!-- 修改接口-->
+	  <update id="updateinterface" parameterClass="com.szzn.mode.Interface">
+		update interface set 
+		interfaces = #interfaces#
+		ctime = #ctime#
+		where name=#name#
+	</update>
+	<!--删除产品-->
+	<delete id="deleteinterface" parameterClass="com.szzn.mode.Interface">
+		delete from interface where name=#name#
+	</delete>
+</sqlMap>

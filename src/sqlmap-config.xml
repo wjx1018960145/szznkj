@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig 
+
+    PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" 
+
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+
+	<sqlMap resource="com/szzn/map/user.xml"/>
+	<sqlMap resource="com/szzn/map/menus.xml"/>
+	<sqlMap resource="com/szzn/map/Permission.xml"/>
+	<sqlMap resource="com/szzn/map/Role.xml" />
+	<sqlMap resource="com/szzn/map/RolePermisson.xml"/>
+	<sqlMap resource="com/szzn/map/UserRole.xml"/>
+	<sqlMap resource="com/szzn/map/Roll.xml"/>
+	<sqlMap resource="com/szzn/map/log.xml"/>
+	<sqlMap resource="com/szzn/map/Interface.xml"/>
+</sqlMapConfig>
+
+

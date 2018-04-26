@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Role">
+	
+	<resultMap id="BaseResultMap" class="com.szzn.mode.Role">
+		<result column="id" property="id"   jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="uid" property="uid" jdbcType="VARCHAR" />
+		<result column="isUse" property="isUse" jdbcType="VARCHAR" />
+		<result column="ctime" property="ctime" jdbcType="VARCHAR" />
+		<result column="operator" property="operator" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+		<!-- 添加角色 -->
+	<insert id="commitR" parameterClass="com.szzn.mode.Role" >
+		insert into Roles (id,description,uid,isUse,ctime,operator,name)
+		values (#id#,
+		#description#,#uid#,#isUse#,#ctime#,#operator#,#name#
+		)
+		<selectKey keyProperty="id" resultClass="java.lang.String">
+		 
+        SELECT LAST_INSERT_ID() AS ID from Roles limit 1  
+        </selectKey>
+	</insert>
+	<!-- 查询所有角色 -->
+	<select id="selectAllR" parameterClass="string"  resultMap="BaseResultMap">
+		SELECT * FROM Roles  
+	</select>
+	
+	 <!-- 修改角色 -->
+	  <update id="updateR" parameterClass="com.szzn.mode.Role">
+		update Roles set 
+		description=#description#,
+		name=#name#,
+		isUse=#isUse#
+		where uid=#uid#
+	</update>
+	
+	<!--删除角色-->
+	<delete id="deleteR" parameterClass="com.szzn.mode.Role">
+		delete from Roles where id=#id#
+	</delete>
+	
+	<!-- 根据id查询角色详情 -->
+	<select id="selectByRoleId" parameterClass="string" resultMap="BaseResultMap">
+		select * from Roles where id=#id#;
+	</select>
+	<!-- 根据启动状态查询角色详情 -->
+	<select id="selectByRoleisUse" parameterClass="string" resultMap="BaseResultMap">
+		select * from Roles where isUse=#isUse#;
+	</select>
+	
+</sqlMap>

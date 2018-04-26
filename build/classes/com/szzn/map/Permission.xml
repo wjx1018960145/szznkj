@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Permission">
+	
+	<resultMap id="BaseResultMap" class="com.szzn.mode.Permission">
+		<result column="id" property="id"   jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="uid" property="uid" jdbcType="VARCHAR" />
+		<result column="isUse" property="isUse" jdbcType="VARCHAR" />
+		<result column="ctime" property="ctime" jdbcType="VARCHAR" />
+		<result column="operator" property="operator" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+		<!-- 添加角色 -->
+	<insert id="commitPermission" parameterClass="com.szzn.mode.Permission">
+		insert into Permission (id,description,uid,isUse,ctime,operator,name)
+		values (#id#,
+		#description#,#uid#,#isUse#,#ctime#,#operator#,#name#
+		)
+		<selectKey keyProperty="id" resultClass="java.lang.String">
+		 
+        SELECT LAST_INSERT_ID() AS ID from Permission limit 1  
+        </selectKey>
+	</insert>
+	<!-- 查询所有角色 -->
+	<select id="selectAllPermission" parameterClass="int"  resultMap="BaseResultMap">
+		SELECT * FROM Permission  
+	</select>
+	
+	 <!-- 修改角色 -->
+	  <update id="updatePermission" parameterClass="com.szzn.mode.Permission">
+		update Permission set 
+		description=#description#,
+		name=#name#,
+		isUse=#isUse#
+		where uid=#uid#
+	</update>
+	
+	<!--删除角色-->
+	<delete id="deletePermission" parameterClass="com.szzn.mode.Permission">
+		delete from Permission where id=#id#
+	</delete>
+	
+	<!-- 根据id查询角色详情 -->
+	<select id="selectByPermissionId" parameterClass="string" resultMap="BaseResultMap">
+		select * from Permission where id=#id#;
+	</select>
+	<!-- 根据启动状态查询角色详情 -->
+	<select id="selectByPermissionisUse" parameterClass="string" resultMap="BaseResultMap">
+		select * from Permission where isUse=#isUse#;
+	</select>
+</sqlMap>

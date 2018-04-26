@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="RolePermission">
+	<resultMap id="BaseResultMap" class="com.szzn.mode.RolePermission">
+		<result column="RoleID" property="roleid"   jdbcType="VARCHAR" />
+		<result column="PermissionID" property="permissionid" jdbcType="VARCHAR" />
+		<result column="UID" property="uid" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+		<!-- 添加角色 -->
+	<insert id="commitRolePermission" parameterClass="com.szzn.mode.RolePermission">
+		insert into role_permissions (RoleID,PermissionID,UID)
+		values (#roleid#,
+		#permissionid#,#uid#
+		)
+		<selectKey keyProperty="roleid" resultClass="java.lang.String">
+		 
+        SELECT LAST_INSERT_ID() AS roleid from role_permissions limit 1  
+        </selectKey>
+	</insert>
+	<!-- 查询所有角色 -->
+	<select id="selectAllRolePermission" parameterClass="int"  resultMap="BaseResultMap">
+		SELECT * FROM role_permissions  
+	</select>
+	
+	 <!-- 修改角色 -->
+	  <update id="updateRolePermission" parameterClass="com.szzn.mode.RolePermission">
+		update role_permissions set 
+		PermissionID=#permissionid#
+		where RoleID=#roleid#
+	</update>
+	
+	<!--删除角色-->
+	<delete id="deleteRolePermission" parameterClass="com.szzn.mode.RolePermission">
+		delete from role_permissions where RoleID=#roleid# and PermissionID = #permissionid#;
+	</delete>
+	
+	<!-- 根据id查询角色详情 -->
+	<select id="selectByRolePermissionid" parameterClass="string" resultMap="BaseResultMap">
+		select * from role_permissions where RoleID=#roleid# or PermissionID = #permissionid#;
+	</select>
+	<!-- 根据id查询角色详情 -->
+	<select id="check" parameterClass="com.szzn.mode.RolePermission" resultMap="BaseResultMap">
+		select * from role_permissions where RoleID=#roleid# and PermissionID = #permissionid#;
+	</select>
+	
+</sqlMap>
