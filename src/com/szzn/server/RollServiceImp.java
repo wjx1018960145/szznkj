@@ -43,10 +43,14 @@ public class RollServiceImp implements RollService {
 	@Override
 	public String update(HttpServletRequest request) throws Exception {
 		// TODO Auto-generated method stub
+		RollList rollList = new RollList();
+		if (dao.update(rollList)) {
+			
+		}else {
+			
+		}
 		
-		
-		
-		return dao.update(param);
+		return "";
 	}
 
 	@Override
