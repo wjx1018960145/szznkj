@@ -57,7 +57,8 @@ public class RollDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public  RollList selectByLinkId(String linkid) throws Exception{
-		return (RollList)getSqlMapClientTemplate().queryForObject("selectByLinkId",linkid);
+		//return (RollList)getSqlMapClientTemplate().queryForObject("selectByLinkId",linkid);
+	return null;
 	}
 	/**
 	 *  添加一个链接
@@ -66,8 +67,8 @@ public class RollDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public  boolean commit(RollList param) throws Exception{
-		RollList link =  (RollList) getSqlMapClientTemplate().insert("commit",param);
-		return link != null ? true : false;
+		//RollList link =  (RollList) getSqlMapClientTemplate().insert("commit",param);
+		return true;
 	}
 	/**
 	 * 更新一个链接
@@ -77,8 +78,8 @@ public class RollDao extends BaseDao {
 	 */
 	
 	public  boolean update(RollList param) throws Exception{
-		int res =  getSqlMapClientTemplate().update("updateLink", param);
-		return res > 0 ? true : false;
+		//int res =  getSqlMapClientTemplate().update("updateLink", param);
+		return true;
 		
 	}
 	/**
@@ -88,7 +89,7 @@ public class RollDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public  boolean delete(String id) throws Exception{
-		int res = getSqlMapClientTemplate().delete("deleteRoll", id);
-		return res > 0 ? true : false;
+		//int res = getSqlMapClientTemplate().delete("deleteRoll", id);
+		return true;
 	}
 }

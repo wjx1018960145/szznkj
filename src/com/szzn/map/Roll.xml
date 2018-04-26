@@ -12,13 +12,13 @@
 		<result column="rolltype" property="type" jdbcType="VARCHAR" />
 	</resultMap>
 	
-		<!--添加产品 -->
+		<!--添加产品
 	<insert id="commitRoll" parameterClass="com.appms.bean.RollList">
 		insert into roll (uid,rollid,rolltitle,rolldes,rolllink,rolltype)
 		values (
 		#key#,#id#,#title#,#des#,#link#,#type#
 		)
-	</insert>
+	</insert> -->
 	<!-- 查询所有产品 -->
 	<select id="selectAllRoll" parameterClass="int"  resultMap="BaseResultMap">
 		SELECT * FROM roll;
