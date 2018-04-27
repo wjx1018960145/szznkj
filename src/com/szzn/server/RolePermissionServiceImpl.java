@@ -43,7 +43,6 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 	public boolean addRole(HttpServletRequest request) throws Exception {
 		Role role = new Role();
 		role.setUid(Encipher.generaterPrimaryKey());
-
 		role.setId(request.getParameter("id"));
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 		role.setCtime(df.format(new Date()));

@@ -39,12 +39,12 @@ public class RollDao extends BaseDao {
 			resultlist.add(map);
 			
 		}
-		result.put("code", "000000");
+		result.put("code", Integer.valueOf("20000"));
 		result.put("msg", "获取成功");
 		result.put("body", resultlist);
 		}else {
-			result.put("code", "111111");
-			result.put("msg", "获取成功,数据为空");
+			result.put("code", Integer.valueOf("30000"));
+			result.put("msg", "获取成功,数据为空!");
 		}
 		String string = JSONObject.fromObject(result).toString();
 		return string;

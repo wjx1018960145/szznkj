@@ -13,7 +13,7 @@ import com.szzn.server.RollService;
 import com.szzn.server.RollServiceImp;
 
 @Controller
-@RequestMapping({"/user"})
+@RequestMapping({"/roll"})
 public class RollListEvent extends BaseController {
 	@Resource
 	RollService service;
