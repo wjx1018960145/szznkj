@@ -46,11 +46,9 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 		role.setId(request.getParameter("id"));
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 		role.setCtime(df.format(new Date()));
-		role.setDescription(new String(request.getParameter("description")
-				.getBytes("iso-8859-1"), "utf-8"));
+		role.setDescription(request.getParameter("description"));
 		role.setIsUse(request.getParameter("isUse"));
-		role.setName(new String(request.getParameter("name").getBytes(
-				"iso-8859-1"), "utf-8"));
+		role.setName(request.getParameter("name"));
 		// 先查找当前角色id是否存在
 		String tmpidString = request.getParameter("id");
 		if ("".equals(tmpidString)) {

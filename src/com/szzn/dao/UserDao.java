@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,17 +38,29 @@ public class UserDao extends BaseDao {
 		return string;
 	}
 
-	@SuppressWarnings({ "unused", "rawtypes" })
+	@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 	public String infoUser(String token) {
 		List<User> queryForList = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Map> resultlist = new ArrayList<Map>();
 		List<String> list = new ArrayList<>();
-		list.add("admin");
+		//list.add("admin");
 		Map<String, Object> result = new HashMap<String, Object>();
 		User user = (User) getSqlMapClientTemplate().queryForObject(
 				"selectByUserId", token);
 		if (user != null) {
+			String roleString = user.getRoles();
+			JSONArray json = JSONArray.fromObject(roleString);//userStr是json字符串
+			List users= (List)JSONArray.toCollection(json);
+			
+			for (Object object : users) {
+				if (object.equals("r10")) {
+					list.add("admin");
+				}else {
+					list.add("edit");
+				}
+			}
+			
 			map.put("id", user.getId());
 			map.put("userid", user.getUserid());
 			map.put("nick", user.getNick());

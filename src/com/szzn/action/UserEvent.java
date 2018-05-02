@@ -38,7 +38,7 @@ public class UserEvent extends BaseController{
 			 String userid = request.getParameter("username");
 				String userpw = request.getParameter("password");
 				User user = new User();
-				user.setPassword(userpw);
+				user.setPassword(Encipher.md5(userpw));
 				user.setUserid(userid);
 				String reString = service.login(user);
 				PrintWriter pw = this.response.getWriter();
