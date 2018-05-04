@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 
 import com.szzn.mode.Interface;
+import com.szzn.mode.Project;
 import com.szzn.utils.Encipher;
 
 
@@ -110,5 +111,54 @@ public class ToolsDao extends BaseDao {
 		String string = JSONObject.fromObject(result).toString();
 		return string;
 	}
+	/**
+	 * 添加一个项目
+	 * @param project
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean commitpro(Project project)throws Exception{
+		String pro=  (String) getSqlMapClientTemplate().insert("commitProject",project);
+		return pro != null ? true : false;
+	}
+	/**
+	 * 查询某个项目信息
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	public Project selectProjectWithProjectName(String name)throws Exception {
+		return (Project)getSqlMapClientTemplate().queryForObject("selectProject",name);
+	}
+	
+	@SuppressWarnings({ "unused", "unchecked" })
+	public String queryProject(String token)throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map> resultlist = new ArrayList<Map>();
+		List<Project> list = getSqlMapClientTemplate().queryForList("selProject"); 
+		if (list.size()>0) {
+		for (Project project : list) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("uid", project.getUid());
+			map.put("id", project.getId());
+			map.put("name", project.getProname());
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+			map.put("ctime",project.getProtime());
+			map.put("des", project.getProdes());
+			resultlist.add(map);
+		}
+		result.put("code", Integer.valueOf("20000"));
+		result.put("msg", "获取成功");
+		result.put("body", resultlist);
+		}else {
+			result.put("code", Integer.valueOf("30000"));
+			result.put("msg", "数据为空或者查询失败");
+			result.put("body", resultlist);
+		}
+		String string = JSONObject.fromObject(result).toString();
+		return string;
+	} 
+	
+	
 	
 }

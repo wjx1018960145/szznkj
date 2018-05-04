@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Project">
+	<resultMap id="BaseResultMap" class="com.szzn.mode.Project">
+		<result column="uid" property="uid" jdbcType="VARCHAR"/>
+		<result column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="proname" property="proname" jdbcType="VARCHAR"/>
+		<result column="prodes" property="prodes" jdbcType="VARCHAR"/>
+		<result column="protime" property="protime" jdbcType="VARCHAR"/>
+		<result column="type"  property="type"  jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!--查询所有项目-->
+	<select id = "selProject" parameterClass="com.szzn.mode.Project" resultMap="BaseResultMap">
+		select * from project 
+	</select>
+	
+	<!-- 根据接项目称查询 -->
+	<select id="selectProject" parameterClass="String" resultMap="BaseResultMap">
+		select * from project where proname=#proname# and id = #id#;
+	</select>
+	<!--添加项目-->
+	<insert id="commitProject" parameterClass="com.szzn.mode.Project">
+		insert into project (uid,id,proname,prodes,protime,type)
+		values (#uid#,#id#,
+		#proname#,#prodes#,#protime#,#type#
+		)
+		<selectKey resultClass="java.lang.String">
+                select id from project where id = #id# 
+            </selectKey>
+	</insert>
+	 <!-- 修改项目-->
+	  <update id="updateProject" parameterClass="com.szzn.mode.Project">
+		update project set 
+		proname = #proname#,
+		prodes = #prodes#,
+		type = #type#,
+		where uid=#uid#
+	</update>
+	<!--删除项目-->
+	<delete id="deleteProject" parameterClass="com.szzn.mode.Project">
+		delete from project where proname=#proname#
+	</delete>
+</sqlMap>

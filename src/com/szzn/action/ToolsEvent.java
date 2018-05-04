@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sun.security.util.PropertyExpander.ExpandException;
+
 import com.szzn.server.ToolsService;
 import com.szzn.server.ToolsServiceImp;
 
@@ -94,5 +96,37 @@ public class ToolsEvent extends BaseController {
 			pw.flush();
 			pw.close();
 		}
+	}
+	@RequestMapping({"/addProject"})
+	public void doit4(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if (this.request.getMethod().equals("OPTIONS")) {
+			PrintWriter pw = this.response.getWriter();
+			// System.out.println(pw);
+			pw.println("");
+			pw.flush();
+			pw.close();
+		}else {
+			String reString = service.addProject(request);
+			PrintWriter pw = this.response.getWriter();
+			pw.println(reString);
+			pw.flush();
+			pw.close();
+		}
+	}
+	@RequestMapping({"/selectAllPro"})
+	public void	 doit5(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String reString = service.selProject(request);
+		PrintWriter pw = this.response.getWriter();
+		pw.println(reString);
+		pw.flush();
+		pw.close();
+	}
+	@RequestMapping({"/selectProWithtoken"})
+	public void	 doit6(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String reString = service.selProject(request);
+		PrintWriter pw = this.response.getWriter();
+		pw.println(reString);
+		pw.flush();
+		pw.close();
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.szzn.dao.ToolsDao;
 import com.szzn.mode.Interface;
+import com.szzn.mode.Project;
 import com.szzn.utils.Encipher;
 
 @Service
@@ -40,6 +41,7 @@ public class ToolsServiceImp implements ToolsService {
 		String valueString = new String(request.getParameter("values").getBytes("iso-8859-1"),"utf-8");
 		interface1.setInterfaces(valueString);
 		interface1.setPrject(request.getParameter("project"));
+		interface1.setAuthor(request.getParameter("token"));
 		interface1.setPath(Encipher.getIpAndPort()+"/szznkj/tools/creatInterface?name="+nameString);
 		Interface interface2 = dao.selectByInterfacetId(nameString);
 		if (interface2!=null) {
@@ -112,6 +114,55 @@ public class ToolsServiceImp implements ToolsService {
 		
 		return JSONObject.fromObject(map).toString();
 	}
+	@Override
+	public String addProject(HttpServletRequest request) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Project project = new Project();
+		project.setUid(Encipher.generaterPrimaryKey());
+		project.setId(request.getParameter("token"));
+		project.setProname(request.getParameter("name"));
+		project.setProdes(request.getParameter("des"));
+		project.setType(request.getParameter("type"));
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+		project.setProtime(df.format(new Date()));
+		
+		Project project1 = dao.selectProjectWithProjectName(request.getParameter("name"));
+		if (project1!=null) {
+			map.put("code", Integer.valueOf("30000"));
+			map.put("msg", "项目名称已存在");
+		}else {
+			if (dao.commitpro(project)) {
+				map.put("code", Integer.valueOf("20000"));
+				map.put("msg", "添加项目成功!");
+			}
+		}
+		
+		return JSONObject.fromObject(map).toString();
+	}
+	@Override
+	public String selProject(HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		String token = request.getParameter("token");
+		return dao.queryProject(token);
+	}
+	@Override
+	public String selProjectWithToken(HttpServletRequest request)
+			throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		String token = request.getParameter("token");
+		Project project = dao.selectProjectWithProjectName(token);
+		if (project!=null) {
+//			map.put("code", Integer.valueOf("20000"));
+//			map.put("", arg1)
+			
+		}else {
+			
+			
+		}
+		return null;
+	}
+	
 	
 
 }
