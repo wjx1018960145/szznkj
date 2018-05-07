@@ -174,6 +174,7 @@ public class ToolsDao extends BaseDao {
 			for (Project project : list) {
 				Map<String, String> map = new HashMap<>();
 				map.put("id", project.getId());
+				map.put("uid", project.getUid());
 				map.put("name", project.getProname());
 				resultlist.add(map);
 			}
