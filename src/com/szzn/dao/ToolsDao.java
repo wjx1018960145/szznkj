@@ -130,6 +130,12 @@ public class ToolsDao extends BaseDao {
 	public Project selectProjectWithProjectName(String name)throws Exception {
 		return (Project)getSqlMapClientTemplate().queryForObject("selectProject",name);
 	}
+	/**
+	 * 
+	 * @param token
+	 * @return
+	 * @throws Exception
+	 */
 	
 	@SuppressWarnings({ "unused", "unchecked" })
 	public String queryProject(String token)throws Exception {
@@ -159,6 +165,14 @@ public class ToolsDao extends BaseDao {
 		return string;
 	} 
 	
+	@SuppressWarnings({ "unused", "unchecked", "rawtypes" })
+	public String queryAllProNameWithToken(String token) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map> resultlist = new ArrayList<Map>();
+		List<Project> list = getSqlMapClientTemplate().queryForList("selectProject"); 
+		
+		return "";
+	}
 	
 	
 }

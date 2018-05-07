@@ -123,7 +123,7 @@ public class ToolsEvent extends BaseController {
 	}
 	@RequestMapping({"/selectProWithtoken"})
 	public void	 doit6(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String reString = service.selProject(request);
+		String reString = service.selProjectWithToken(request);
 		PrintWriter pw = this.response.getWriter();
 		pw.println(reString);
 		pw.flush();

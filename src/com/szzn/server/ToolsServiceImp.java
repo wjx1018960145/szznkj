@@ -3,6 +3,7 @@ package com.szzn.server;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -151,7 +152,7 @@ public class ToolsServiceImp implements ToolsService {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		String token = request.getParameter("token");
-		Project project = dao.selectProjectWithProjectName(token);
+		String project = dao.queryAllProNameWithToken(token);
 		if (project!=null) {
 //			map.put("code", Integer.valueOf("20000"));
 //			map.put("", arg1)
