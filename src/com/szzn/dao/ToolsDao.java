@@ -169,9 +169,23 @@ public class ToolsDao extends BaseDao {
 	public String queryAllProNameWithToken(String token) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map> resultlist = new ArrayList<Map>();
-		List<Project> list = getSqlMapClientTemplate().queryForList("selectProject"); 
-		
-		return "";
+		List<Project> list = getSqlMapClientTemplate().queryForList("selectProject",token);
+		if (list.size()>0) {
+			for (Project project : list) {
+				Map<String, String> map = new HashMap<>();
+				map.put("id", project.getId());
+				map.put("name", project.getProname());
+				resultlist.add(map);
+			}
+			result.put("code", Integer.valueOf("20000"));
+			result.put("msg", "查询成功!");
+			result.put("body", resultlist);
+		}else {
+			result.put("code", Integer.valueOf("30000"));
+			result.put("msg", "项目为空请先添加项目!");
+			result.put("body", resultlist);
+		}
+		return JSONObject.fromObject(result).toString();
 	}
 	
 	

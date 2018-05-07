@@ -153,15 +153,8 @@ public class ToolsServiceImp implements ToolsService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String token = request.getParameter("token");
 		String project = dao.queryAllProNameWithToken(token);
-		if (project!=null) {
-//			map.put("code", Integer.valueOf("20000"));
-//			map.put("", arg1)
-			
-		}else {
-			
-			
-		}
-		return null;
+		
+		return project;
 	}
 	
 	

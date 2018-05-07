@@ -17,7 +17,7 @@
 	
 	<!-- 根据接项目称查询 -->
 	<select id="selectProject" parameterClass="String" resultMap="BaseResultMap">
-		select * from project where proname=#proname# and id = #id#;
+		select * from project where proname=#proname# or id = #id#;
 	</select>
 	<!--添加项目-->
 	<insert id="commitProject" parameterClass="com.szzn.mode.Project">
