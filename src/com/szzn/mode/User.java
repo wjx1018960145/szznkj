@@ -12,6 +12,8 @@ public class User {
 	private String phone;
 	private String position;
 	private String sex;
+	private String longitude;//经度
+	private String dimension;//维度
 	
 	public String getId() {
 		return id;
@@ -78,6 +80,18 @@ public class User {
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	public String getDimension() {
+		return dimension;
+	}
+	public void setDimension(String dimension) {
+		this.dimension = dimension;
 	}
 	
 }

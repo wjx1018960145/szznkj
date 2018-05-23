@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="CityPosition">
+	<resultMap id="BaseResultMap" class="com.szzn.mode.CityPosition">
+		<result column="uid" property="uid" jdbcType="VARCHAR"/>
+		<result column="cityid" property="cityid" jdbcType="VARCHAR"/>
+		<result column="cityname" property="cityname" jdbcType="VARCHAR"/>
+		<result column="longitude" property="longitude" jdbcType="VARCHAR"/>
+		<result column="dimension" property="dimension" jdbcType="VARCHAR"/>
+		
+	</resultMap>
+	
+	<!--查询所有项目-->
+	<select id = "selCity" parameterClass="String" resultMap="BaseResultMap">
+		select * from city 
+	</select>
+	
+	<!-- 根据接项目称查询 -->
+	<select id="selectCity" parameterClass="String" resultMap="BaseResultMap">
+		select * from city where uid=#uid#
+	</select>
+	<!--添加项目-->
+	<insert id="commitCity" parameterClass="com.szzn.mode.CityPosition">
+		insert into city (uid,cityid,cityname,longitude,dimension)
+		values (#uid#,#cityid#,
+		#cityname#,#longitude#,#dimension#
+		)
+		<selectKey resultClass="java.lang.String">
+                select uid from city where uid = #uid# 
+            </selectKey>
+	</insert>
+	 <!-- 修改项目-->
+	  <update id="updateCity" parameterClass="com.szzn.mode.CityPosition">
+		update city set 
+		cityname = #cityname#,
+		longitude = #longitude#,
+		dimension = #dimension#,
+		where uid=#uid#
+	</update>
+	<!--删除项目-->
+	<delete id="deleteCity" parameterClass="com.szzn.mode.CityPosition">
+		delete from city where uid=#uid#
+	</delete>
+</sqlMap>

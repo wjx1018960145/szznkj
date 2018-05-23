@@ -141,7 +141,7 @@ public class ToolsDao extends BaseDao {
 	public String queryProject(String token)throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map> resultlist = new ArrayList<Map>();
-		List<Project> list = getSqlMapClientTemplate().queryForList("selProject"); 
+		List<Project> list = getSqlMapClientTemplate().queryForList("selProject",token); 
 		if (list.size()>0) {
 		for (Project project : list) {
 			Map<String, Object> map = new HashMap<String, Object>();

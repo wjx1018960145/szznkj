@@ -52,6 +52,14 @@
 		where id=#id#
 	</update>
 	
+	 <update id="updateGeographicPosition" parameterClass="com.szzn.mode.User">
+		update user set 
+		 longitude=#longitude#
+		,dimension=#dimension#
+		where userid=#userid#
+	</update>
+	
+	
 	<!--删除用户-->
 	<delete id="deleteUser" parameterClass="com.szzn.mode.User">
 		delete from user where id=#id#

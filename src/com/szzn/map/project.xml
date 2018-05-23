@@ -11,8 +11,8 @@
 	</resultMap>
 	
 	<!--查询所有项目-->
-	<select id = "selProject" parameterClass="com.szzn.mode.Project" resultMap="BaseResultMap">
-		select * from project 
+	<select id = "selProject" parameterClass="String" resultMap="BaseResultMap">
+		select * from project where id = #id#
 	</select>
 	
 	<!-- 根据接项目称查询 -->

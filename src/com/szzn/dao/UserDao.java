@@ -21,15 +21,24 @@ public class UserDao extends BaseDao {
 	 *            传入用户实体
 	 * @return
 	 */
-	public String login(User param) {
+	public String login(User param) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		User user = (User) getSqlMapClientTemplate().queryForObject("login",
 				param);
 		if (user != null) {
-			map.put("code", Integer.valueOf("20000"));
-			map.put("token", user.getUserid());
-			map.put("msg", "登陆成功");
-			map.put("body", user);
+			
+			if (updateGeographicPosition(param.getLongitude(),param.getDimension(),param.getUserid())) {
+				map.put("code", Integer.valueOf("20000"));
+				map.put("token", user.getUserid());
+				map.put("msg", "登陆成功");
+				map.put("body", user);
+			}else {
+				map.put("code", Integer.valueOf("20000"));
+				map.put("token", user.getUserid());
+				map.put("msg", "地理位置获取失败");
+				map.put("body", user);
+			}
+			
 		} else {
 			map.put("code", "11111");
 			map.put("msg", "登陆失败");
@@ -163,5 +172,14 @@ public class UserDao extends BaseDao {
 		return res > 0 ? true : false;
 	}
 	
+	@SuppressWarnings("unused")
+	private boolean updateGeographicPosition(String longitude,String dimension,String userid)throws Exception {
+		User user = new  User();
+		user.setLongitude(longitude);
+		user.setDimension(dimension);
+		user.setUserid(userid);
+		int res = getSqlMapClientTemplate().delete("updateGeographicPosition", user);
+		return res > 0 ? true : false;
+	}
 
 }
