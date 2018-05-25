@@ -14,5 +14,4 @@ public class IndexServiceImp implements IndexService {
 		// TODO Auto-generated method stub
 		return dao.select();
 	}
-
 }
