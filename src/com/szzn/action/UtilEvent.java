@@ -36,5 +36,28 @@ public class UtilEvent extends BaseController {
 		
 	}
 	
+	@RequestMapping({"/add"})
+	public void doit1(HttpServletResponse response, HttpServletRequest request)throws Exception{
+		super.setReqAndRes(request, response);
+		 if (this.request.getMethod().equals("OPTIONS")) {
+			 PrintWriter pw = this.response.getWriter();
+				//System.out.println(pw);
+				pw.println("");
+				pw.flush();
+				pw.close();
+		 
+		 }else {
+			 String token = request.getParameter("token");
+				String reString = service.addCity(request);
+				PrintWriter pw = this.response.getWriter();
+				System.out.println(pw);
+				pw.println(reString);
+				pw.flush();
+				pw.close();
+		 }
+		
+	}
+	
+	
 	
 }
