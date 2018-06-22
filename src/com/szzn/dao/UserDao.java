@@ -5,15 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sun.org.apache.bcel.internal.generic.DADD;
+import com.szzn.mode.CityPosition;
 import com.szzn.mode.User;
 
 @Component
 public class UserDao extends BaseDao {
+	
+	@Resource
+	UtilsDao dao;
 	/**
 	 * 后管登陆
 	 * 
@@ -27,7 +34,9 @@ public class UserDao extends BaseDao {
 				param);
 		if (user != null) {
 			
-			if (updateGeographicPosition(param.getLongitude(),param.getDimension(),param.getUserid())) {
+			CityPosition cityPosition = dao.queryCityWithcityid(param.getCityId());
+			
+			if (updateGeographicPosition(cityPosition.getLongitude(),cityPosition.getDimension(),param.getUserid())) {
 				map.put("code", Integer.valueOf("20000"));
 				map.put("token", user.getUserid());
 				map.put("msg", "登陆成功");

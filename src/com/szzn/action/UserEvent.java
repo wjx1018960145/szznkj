@@ -37,11 +37,13 @@ public class UserEvent extends BaseController{
 		 }else {
 			 String userid = request.getParameter("username");
 				String userpw = request.getParameter("password");
+				String cityid = request.getParameter("cityid");
 				String longitude = request.getParameter("longitude");
 				String dimension = request.getParameter("dimension");
 				User user = new User();
 				user.setPassword(Encipher.md5(userpw));
 				user.setUserid(userid);
+				user.setCityId(cityid);
 				user.setLongitude(longitude);
 				user.setDimension(dimension);
 				String reString = service.login(user);

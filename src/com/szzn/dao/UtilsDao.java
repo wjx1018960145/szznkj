@@ -65,5 +65,11 @@ public class UtilsDao extends BaseDao {
 		
 	}
 	
+	public CityPosition queryCityWithcityid (String cityid) throws Exception {
+		CityPosition cityPosition = (CityPosition) getSqlMapClientTemplate().queryForObject(
+				"selectCity", cityid);
+		return cityPosition;
+	}
+	
 	
 }

@@ -12,6 +12,7 @@ public class User {
 	private String phone;
 	private String position;
 	private String sex;
+	private String cityId;
 	private String longitude;//经度
 	private String dimension;//维度
 	
@@ -80,6 +81,13 @@ public class User {
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+	
+	public String getCityId() {
+		return cityId;
+	}
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
 	}
 	public String getLongitude() {
 		return longitude;
