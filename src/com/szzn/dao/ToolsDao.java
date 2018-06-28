@@ -151,6 +151,7 @@ public class ToolsDao extends BaseDao {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 			map.put("ctime",project.getProtime());
 			map.put("des", project.getProdes());
+			map.put("isopen", project.getType());
 			resultlist.add(map);
 		}
 		result.put("code", Integer.valueOf("20000"));
