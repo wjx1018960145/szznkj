@@ -25,7 +25,7 @@
 		values (#uid#,#id#,
 		#proname#,#prodes#,#protime#,#type#
 		)
-		<selectKey resultClass="java.lang.String">
+		<selectKey resultClass="com.szzn.mode.Project">
                 select id from project where id = #id# 
             </selectKey>
 	</insert>
