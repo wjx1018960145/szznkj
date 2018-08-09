@@ -35,22 +35,29 @@ public class UserDao extends BaseDao {
 		if (user != null) {
 			
 			CityPosition cityPosition = dao.queryCityWithcityid(param.getCityId());
-			
-			if (updateGeographicPosition(cityPosition.getLongitude(),cityPosition.getDimension(),param.getUserid())) {
-				map.put("code", Integer.valueOf("20000"));
+			if (cityPosition == null) {
+				map.put("code", Integer.valueOf("20001"));
 				map.put("token", user.getUserid());
-				map.put("msg", "登陆成功");
+				map.put("msg", "请选择登录城市");
 				map.put("body", user);
 			}else {
-				map.put("code", Integer.valueOf("20000"));
-				map.put("token", user.getUserid());
-				map.put("msg", "地理位置获取失败");
-				map.put("body", user);
+				if (updateGeographicPosition(cityPosition.getLongitude(),cityPosition.getDimension(),param.getUserid())) {
+					map.put("code", Integer.valueOf("20000"));
+					map.put("token", user.getUserid());
+					map.put("msg", "登陆成功");
+					map.put("body", user);
+				}else {
+					map.put("code", Integer.valueOf("30000"));
+					map.put("token", user.getUserid());
+					map.put("msg", "地理位置获取失败");
+					map.put("body", user);
+				}
 			}
+			
 			
 		} else {
 			map.put("code", "11111");
-			map.put("msg", "登陆失败");
+			map.put("msg", "用户名或者密码错误");
 		}
 		String string = JSONObject.fromObject(map).toString();
 		return string;
