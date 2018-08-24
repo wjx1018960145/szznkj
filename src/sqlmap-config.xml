@@ -18,6 +18,7 @@
 	<sqlMap resource="com/szzn/map/Interface.xml"/>
 	<sqlMap resource="com/szzn/map/project.xml"/>
 	<sqlMap resource="com/szzn/map/City.xml"/>
+	<sqlMap resource="com/szzn/map/Chart.xml"/>
 </sqlMapConfig>
 
 

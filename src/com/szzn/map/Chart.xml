@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Chart">
+	<resultMap id="BaseResultMap" class="com.szzn.mode.Chart">
+		<!--<result column="uid" property="uid" jdbcType="VARCHAR"/>
+		<result column="cityid" property="cityid" jdbcType="VARCHAR"/>
+		<result column="cityname" property="cityname" jdbcType="VARCHAR"/>
+		<result column="longitude" property="longitude" jdbcType="VARCHAR"/>
+		<result column="dimension" property="dimension" jdbcType="VARCHAR"/>-->
+		
+	</resultMap>
+	
+	<!---->
+	
+</sqlMap>
