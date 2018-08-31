@@ -119,7 +119,7 @@ public class ToolsDao extends BaseDao {
 	 */
 	public boolean commitpro(Project project)throws Exception{
 		String pro=  (String) getSqlMapClientTemplate().insert("commitProject",project);
-		return pro != null ? true : false;
+		return pro == null ? true : false;
 	}
 	/**
 	 * 查询某个项目信息
@@ -137,11 +137,12 @@ public class ToolsDao extends BaseDao {
 	 * @throws Exception
 	 */
 	
-	@SuppressWarnings({ "unused", "unchecked" })
-	public String queryProject(String token)throws Exception {
+	
+	@SuppressWarnings("unchecked")
+	public String queryProject(Map<String, Object> permap)throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map> resultlist = new ArrayList<Map>();
-		List<Project> list = getSqlMapClientTemplate().queryForList("selProject",token); 
+		List<Project> list = getSqlMapClientTemplate().queryForList("selProject",permap); 
 		if (list.size()>0) {
 		for (Project project : list) {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -189,6 +190,15 @@ public class ToolsDao extends BaseDao {
 		}
 		return JSONObject.fromObject(result).toString();
 	}
-	
+	/**
+	 * 删除一个项目
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public  boolean deleteByProName(Project param) throws Exception{
+		int res =  getSqlMapClientTemplate().update("deleteProject", param);
+		return res > 0 ? true : false;
+	}
 	
 }

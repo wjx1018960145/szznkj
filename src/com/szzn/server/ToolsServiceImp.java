@@ -131,9 +131,13 @@ public class ToolsServiceImp implements ToolsService {
 		if (project1!=null) {
 			map.put("code", Integer.valueOf("30000"));
 			map.put("msg", "项目名称已存在");
+			
 		}else {
 			if (dao.commitpro(project)) {
 				map.put("code", Integer.valueOf("20000"));
+				map.put("msg", "添加项目成功!");
+			}else {
+				map.put("code", Integer.valueOf("30000"));
 				map.put("msg", "添加项目成功!");
 			}
 		}
@@ -143,8 +147,25 @@ public class ToolsServiceImp implements ToolsService {
 	@Override
 	public String selProject(HttpServletRequest request) throws Exception {
 		// TODO Auto-generated method stub
-		String token = request.getParameter("token");
-		return dao.queryProject(token);
+		 // 显示数量
+		  int pageSize = 1;
+		  // 当前页数
+		  int currentPage = 1;
+		  // 起始条数
+		  int begin = 0;
+		  // 筛选条件
+		  pageSize = 10;
+		 String token = request.getParameter("token");
+		// String index = request.getParameter("currentPage");
+		 currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		//封装分页方法
+		  begin = currentPage > 1 ? pageSize * (currentPage - 1) : 0;
+		 Map<String, Object> param = new HashMap<String, Object>();
+		  param.put("begin", begin);
+		  param.put("pageSize", pageSize);
+		  param.put("id", token);
+		  
+		return dao.queryProject(param);
 	}
 	@Override
 	public String selProjectWithToken(HttpServletRequest request)
@@ -157,6 +178,23 @@ public class ToolsServiceImp implements ToolsService {
 		return project;
 	}
 	
+	@Override
+	public String delProject(HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		String proNameString = request.getParameter("proname");
+		Project project = new Project();
+		project.setProname(proNameString);
+		if (dao.deleteByProName(project)) {
+			map.put("code", Integer.valueOf("20000"));
+			map.put("msg", "删除成功");
+		}else {
+			map.put("code", Integer.valueOf("30000"));
+			map.put("msg", "删除失败");
+		}
+		return JSONObject.fromObject(map).toString();
+		//return ;
+	}
 	
 
 }

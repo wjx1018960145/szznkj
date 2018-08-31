@@ -11,4 +11,5 @@ public abstract interface ToolsService {
 	public abstract String addProject(HttpServletRequest request)throws Exception;
 	public abstract String selProject(HttpServletRequest request)throws Exception;
 	public abstract String selProjectWithToken(HttpServletRequest request)throws Exception;
+	public abstract String delProject(HttpServletRequest request)throws Exception;
 }

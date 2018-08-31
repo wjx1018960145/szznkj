@@ -11,8 +11,8 @@
 	</resultMap>
 	
 	<!--查询所有项目-->
-	<select id = "selProject" parameterClass="String" resultMap="BaseResultMap">
-		select * from project where id = #id#
+	<select id = "selProject" parameterClass="java.util.Map" resultMap="BaseResultMap">
+		select * from project where id = #id# ORDER BY protime desc limit #begin#,#pageSize#
 	</select>
 	
 	<!-- 根据接项目称查询 -->
@@ -25,9 +25,7 @@
 		values (#uid#,#id#,
 		#proname#,#prodes#,#protime#,#type#
 		)
-		<selectKey resultClass="com.szzn.mode.Project">
-                select id from project where id = #id# 
-            </selectKey>
+		
 	</insert>
 	 <!-- 修改项目-->
 	  <update id="updateProject" parameterClass="com.szzn.mode.Project">

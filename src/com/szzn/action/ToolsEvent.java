@@ -129,5 +129,22 @@ public class ToolsEvent extends BaseController {
 		pw.flush();
 		pw.close();
 	}
+	@RequestMapping({"/deleProWithtoken"})
+	public void	 doit7(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		if (this.request.getMethod().equals("OPTIONS")) {
+			PrintWriter pw = this.response.getWriter();
+			// System.out.println(pw);
+			pw.println("");
+			pw.flush();
+			pw.close();
+		}else {
+			String reString = service.delProject(request);
+			PrintWriter pw = this.response.getWriter();
+			pw.println(reString);
+			pw.flush();
+			pw.close();
+		}
+	}
+	
 	
 }
